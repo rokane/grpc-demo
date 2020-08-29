@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package greeter.v1alpha1;
+package greeter.v1;
 
 option go_package = "greeter;greeter";
 option csharp_namespace = "Greeter";
 option java_multiple_files = true;
 option java_outer_classname = "GreeterProto";
-option java_package = "com.greeter.v1alpha1";
+option java_package = "com.greeter.v1";
 
 // Greeter is a simple service which keeps track of who has said hello to it.
 service Greeter {

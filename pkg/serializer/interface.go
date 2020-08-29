@@ -3,19 +3,19 @@ package serializer
 import (
 	"context"
 
-	v1alpha1 "github.com/rokane/pkg/api/greeter/v1alpha1"
-	v1alpha2 "github.com/rokane/pkg/api/greeter/v1alpha2"
-	db "github.com/rokane/pkg/database"
+	v1 "github.com/rokane/grpc-demo/pkg/api/greeter/v1"
+	v2 "github.com/rokane/grpc-demo/pkg/api/greeter/v2"
+	db "github.com/rokane/grpc-demo/pkg/database"
 )
 
 type SayHelloSerializer interface {
-	ToV1Alpha1() (*v1alpha1.SayHelloResponse, error)
-	ToV1Alpha2() (*v1alpha2.SayHelloResponse, error)
+	ToV1Alpha1() (*v1.SayHelloResponse, error)
+	ToV1Alpha2() (*v2.SayHelloResponse, error)
 }
 
 type SayGoodbyeSerializer interface {
-	ToV1Alpha1() (*v1alpha1.SayGoodbyeResponse, error)
-	ToV1Alpha2() (*v1alpha2.SayGoodbyeResponse, error)
+	ToV1Alpha1() (*v1.SayGoodbyeResponse, error)
+	ToV1Alpha2() (*v2.SayGoodbyeResponse, error)
 }
 
 type DatabaseSerializer interface {
