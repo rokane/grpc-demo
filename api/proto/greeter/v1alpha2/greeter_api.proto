@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package greeter.v1alpha2;
+
+option go_package = "greeter;greeter";
+option csharp_namespace = "Greeter";
+option java_multiple_files = true;
+option java_outer_classname = "GreeterProto";
+option java_package = "com.greeter.v1alpha2";
+
+// Greeter is a simple service which keeps track of who has said hello to it.
+service Greeter {
+
+  // SayHello will register a user in the database, and return a nice message 
+  // to the caller.
+  rpc SayHello(SayHelloRequest) returns (SayHelloResponse) {}
+
+  // GayGoodbye will remove the user from the database, and return a nice 
+  // message to the caller.
+  rpc SayGoodbye(SayGoodbyeRequest) returns (SayGoodbyeResponse) {}
+
+}
+
+message SayHelloRequest {
+  string first_name = 1;
+  string last_name = 2;
+}
+
+message SayHelloResponse {
+  string message = 1;
+}
+
+message SayGoodbyeRequest {
+  string first_name = 1;
+  string last_name = 2;
+}
+
+message SayGoodbyeResponse {
+  string message = 1;
+}
