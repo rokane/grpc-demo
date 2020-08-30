@@ -9,16 +9,28 @@ import (
 )
 
 type SayHelloSerializer interface {
-	ToV1Alpha1() (*v1.SayHelloResponse, error)
-	ToV1Alpha2() (*v2.SayHelloResponse, error)
+	ToV1() (*v1.SayHelloResponse, error)
+	ToV2() (*v2.SayHelloResponse, error)
 }
 
 type SayGoodbyeSerializer interface {
-	ToV1Alpha1() (*v1.SayGoodbyeResponse, error)
-	ToV1Alpha2() (*v2.SayGoodbyeResponse, error)
+	ToV1() (*v1.SayGoodbyeResponse, error)
+	ToV2() (*v2.SayGoodbyeResponse, error)
 }
 
 type DatabaseSerializer interface {
-	RegisterDetails(context.Context, db.User) (SayHelloSerializer, error)
-	DeleteUser(context.Context, db.RegisteredUser) (SayGoodbyeSerializer, error)
+	RegisterDetails(context.Context, db.RegisterDetailsCriteria) (SayHelloSerializer, error)
+	DeleteUser(context.Context, db.DeleteUserCriteria) (SayGoodbyeSerializer, error)
+}
+
+type dbserializer struct {
+	storer db.Storer
+}
+
+func NewDBSerializer() (DatabaseSerializer, error) {
+	storer, err := db.NewMemstore()
+	if err != nil {
+		return nil, err
+	}
+	return &dbserializer{storer}, nil
 }

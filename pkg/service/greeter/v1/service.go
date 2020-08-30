@@ -13,9 +13,13 @@ type service struct {
 }
 
 func NewService() (*v1.GreeterService, error) {
+	serializer, err := serializer.NewDBSerializer()
+	if err != nil {
+		return nil, err
+	}
 	s := &service{
 		ctx:        context.Background(),
-		serializer: nil,
+		serializer: serializer,
 	}
 	return &v1.GreeterService{
 		SayHello:   s.SayHello,

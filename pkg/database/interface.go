@@ -2,13 +2,15 @@ package database
 
 import "context"
 
-type User struct {
-}
-
-type RegisteredUser struct {
-}
-
 type Storer interface {
-	RegisterDetails(context.Context, User) (RegisteredUser, error)
-	DeleteUser(context.Context, RegisteredUser) (RegisteredUser, error)
+	RegisterDetails(context.Context, RegisterDetailsCriteria) (*RegisterDetailsResp, error)
+	DeleteUser(context.Context, DeleteUserCriteria) (*DeleteUserResp, error)
+}
+
+type memstore struct {
+	users map[string]int
+}
+
+func NewMemstore() (Storer, error) {
+	return &memstore{users: make(map[string]int)}, nil
 }
