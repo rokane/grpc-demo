@@ -1,13 +1,15 @@
 package main
 
 import (
-	"google.golang.org/grpc"
-	apiv1 "github.com/rokane/grpc-demo/pkg/api/greeter/v1"
-	greeterv1 "github.com/rokane/grpc-demo/pkg/service/greeter/v1"
-	apiv2 "github.com/rokane/grpc-demo/pkg/api/greeter/v2"
-	greeterv2 "github.com/rokane/grpc-demo/pkg/service/greeter/v2"
 	"log"
 	"net"
+
+	apiv1 "github.com/rokane/grpc-demo/pkg/api/greeter/v1"
+	apiv2 "github.com/rokane/grpc-demo/pkg/api/greeter/v2"
+	greeterv1 "github.com/rokane/grpc-demo/pkg/service/greeter/v1"
+	greeterv2 "github.com/rokane/grpc-demo/pkg/service/greeter/v2"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -20,6 +22,7 @@ func main() {
 		log.Fatal("unable to listen on port ", port)
 	}
 	server := grpc.NewServer()
+	reflection.Register(server)
 
 	// Register API v1
 	greeterV1, err := greeterv1.NewService()
@@ -38,6 +41,6 @@ func main() {
 	log.Printf("listening on port %s", port)
 
 	if err := server.Serve(lis); err != nil {
-		log.Fatal("failed to serve: %v", err)
+		log.Fatalf("failed to serve: %v", err)
 	}
 }
