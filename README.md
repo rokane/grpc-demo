@@ -5,7 +5,7 @@ gRPC servers such that they can handle multiple API versions.
 
 Code is spoken about in more detail in the following blog post:
 
-[insert blog post here](https://link.com)
+[Building APIs with gRPC and Go](https://medium.com/@ryan.okane8/building-apis-with-grpc-and-go-9a6d369d7ce)
 
 The gRPC server itself contains two implementations of the `Greeter` service.
 Both services contain the same two endpoints (as explained below), but with
